@@ -1,6 +1,6 @@
 # Device API 🚀
 
-A RESTful API for managing devices built with Spring Boot 3, PostgreSQL, and Docker. Features comprehensive testing with 200+ tests and 85%+ code coverage.
+A RESTful API for managing devices built with Spring Boot 3, PostgreSQL, and Docker. Features comprehensive testing with tests.
 
 ## 📋 Table of Contents
 
