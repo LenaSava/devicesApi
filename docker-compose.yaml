@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: devices-postgres
+    environment:
+      POSTGRES_DB: devices_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d devices_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - devices-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devices-api
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: devices_db
+      DB_USERNAME: admin
+      DB_PASSWORD: password
+      SPRING_PROFILES_ACTIVE: default
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - devices-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  devices-network:
+    driver: bridge

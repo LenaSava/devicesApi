@@ -7,12 +7,15 @@ import lombok.NoArgsConstructor;
 import org.hometask.devicesapi.model.DeviceState;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeviceResponse {
+public class DeviceDTO {
+
+    private Long id;
 
     private String name;
 
@@ -20,5 +23,5 @@ public class DeviceResponse {
 
     private DeviceState state;
 
-    private LocalDateTime creationTime;
+    private OffsetDateTime creationTime;
 }

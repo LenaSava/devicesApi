@@ -3,9 +3,9 @@ spring:
     name: device-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/mydb
-    username: myuser
-    password: mypass
+    url: jdbc:postgresql://localhost:5432/devices_db
+    username: admin
+    password: password
 
   jpa:
     hibernate:
@@ -14,4 +14,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
 

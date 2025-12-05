@@ -3,5 +3,5 @@ CREATE TABLE device (
                         name VARCHAR(255) NOT NULL,
                         brand VARCHAR(255) NOT NULL,
                         state VARCHAR(20) NOT NULL,
-                        creation_time TIMESTAMP NOT NULL
+                        creation_time TIMESTAMP WITH TIME ZONE NOT NULL
 );
