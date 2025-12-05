@@ -25,8 +25,8 @@ A RESTful API for managing devices built with Spring Boot 3, PostgreSQL, and Doc
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
-cd device-api
+git clone https://github.com/LenaSava/devicesApi.git
+cd devicesApi
 ```
 
 ### 2. Run with Docker Compose
