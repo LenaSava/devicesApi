@@ -291,15 +291,6 @@ src/test/java/org/hometask/devicesapi/
     └── DeviceApiFunctionalTestSeparate.java 
 ```
 
-### Coverage Goals
-
-| Metric                  | Target | Current Status |
-|-------------------------|--------|----------------|
-| Overall Line Coverage   | 85%+ | ✅ ~90% |
-| Overall Branch Coverage | 75%+ | ✅ ~85% |
-| Controllers             | 90%+ | ✅ 92% |
-| Services                | 95%+ | ✅ 96% |
-| Validators              | 100% | ✅ 100% |
 
 ### CI/CD Integration
 
