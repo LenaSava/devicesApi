@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hometask.devicesapi.model.DeviceState;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Data

@@ -529,7 +529,7 @@ class DeviceControllerTest {
     @Test
     void getDevices_WithMultipleParams_ShouldPrioritizeBrand() throws Exception {
         // Given - When both brand and state are provided, brand takes precedence
-        List<DeviceDTO> deviceList = Arrays.asList(
+        List<DeviceDTO> deviceList = List.of(
                 createDeviceDTO(1L, "iPhone 15 Pro", "Apple", DeviceState.AVAILABLE)
         );
         Page<DeviceDTO> page = new PageImpl<>(deviceList);
@@ -561,7 +561,7 @@ class DeviceControllerTest {
     @Test
     void createDevice_WithoutContentType_ShouldReturnUnsupportedMediaType() throws Exception {
         // Given
-        DeviceCreateRequest request = createDeviceRequest("iPhone 15 Pro", "Apple");
+        DeviceCreateRequest request = createDeviceRequest("iPhone 15 Pro");
 
         // When & Then
         mockMvc.perform(post("/device-service/v1/devices")
@@ -576,7 +576,7 @@ class DeviceControllerTest {
     void createDevice_WithVeryLongName_ShouldProcess() throws Exception {
         // Given
         String longName = "A".repeat(500);
-        DeviceCreateRequest request = createDeviceRequest(longName, "Apple");
+        DeviceCreateRequest request = createDeviceRequest(longName);
         DeviceCreateCommand command = new DeviceCreateCommand(
                 longName,
                 "Apple",
@@ -614,8 +614,8 @@ class DeviceControllerTest {
         verify(deviceService, times(1)).getDevicesByBrand(brandWithSpecialChars, 0, 10, null);
     }
 
-    private DeviceCreateRequest createDeviceRequest(String name, String brand) {
-        return new DeviceCreateRequest(name, brand);
+    private DeviceCreateRequest createDeviceRequest(String name) {
+        return new DeviceCreateRequest(name, "Apple");
     }
 
     private DeviceDTO createDeviceDTO(Long id, String name, String brand, DeviceState state) {

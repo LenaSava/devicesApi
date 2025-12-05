@@ -402,7 +402,7 @@ class DeviceServiceTest {
 
         // Then
         assertThat(result.getContent()).hasSize(1);
-        assertThat(result.getContent().get(0).getState()).isEqualTo(DeviceState.IN_USE);
+        assertThat(result.getContent().getFirst().getState()).isEqualTo(DeviceState.IN_USE);
     }
 
     @Test
@@ -423,7 +423,7 @@ class DeviceServiceTest {
 
         // Then
         assertThat(result.getContent()).hasSize(1);
-        assertThat(result.getContent().get(0).getState()).isEqualTo(DeviceState.INACTIVE);
+        assertThat(result.getContent().getFirst().getState()).isEqualTo(DeviceState.INACTIVE);
     }
 
     @Test

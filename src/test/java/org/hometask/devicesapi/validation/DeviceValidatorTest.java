@@ -207,7 +207,7 @@ class DeviceValidatorTest {
     @Test
     void validateUpdate_InUseDevice_NameWithSpaces_ShouldThrowException() {
         // Given
-        DeviceEntity device = createDevice(1L, "iPhone 15", "Apple", DeviceState.IN_USE);
+        DeviceEntity device = createDevice(1L, DeviceState.IN_USE);
         DeviceUpdateCommand command = createUpdateCommand(" iPhone 15 ", null, null);
 
         // When & Then
@@ -219,7 +219,7 @@ class DeviceValidatorTest {
     @Test
     void validateUpdate_InUseDevice_DifferentCase_ShouldThrowException() {
         // Given
-        DeviceEntity device = createDevice(1L, "iPhone 15", "Apple", DeviceState.IN_USE);
+        DeviceEntity device = createDevice(1L, DeviceState.IN_USE);
         DeviceUpdateCommand command = createUpdateCommand("iphone 15", null, null);
 
         // When & Then
@@ -231,7 +231,7 @@ class DeviceValidatorTest {
     @Test
     void validateUpdate_InUseDevice_BrandDifferentCase_ShouldThrowException() {
         // Given
-        DeviceEntity device = createDevice(1L, "iPhone 15", "Apple", DeviceState.IN_USE);
+        DeviceEntity device = createDevice(1L, DeviceState.IN_USE);
         DeviceUpdateCommand command = createUpdateCommand(null, "apple", null);
 
         // When & Then
@@ -243,7 +243,7 @@ class DeviceValidatorTest {
     @Test
     void validateUpdate_InUseDevice_EmptyName_ShouldThrowException() {
         // Given
-        DeviceEntity device = createDevice(1L, "iPhone 15", "Apple", DeviceState.IN_USE);
+        DeviceEntity device = createDevice(1L, DeviceState.IN_USE);
         DeviceUpdateCommand command = createUpdateCommand("", null, null);
 
         // When & Then
@@ -255,7 +255,7 @@ class DeviceValidatorTest {
     @Test
     void validateUpdate_InUseDevice_EmptyBrand_ShouldThrowException() {
         // Given
-        DeviceEntity device = createDevice(1L, "iPhone 15", "Apple", DeviceState.IN_USE);
+        DeviceEntity device = createDevice(1L, DeviceState.IN_USE);
         DeviceUpdateCommand command = createUpdateCommand(null, "", null);
 
         // When & Then
@@ -267,7 +267,7 @@ class DeviceValidatorTest {
     @Test
     void validateUpdate_InUseDevice_SpecialCharactersInName_ShouldThrowException() {
         // Given
-        DeviceEntity device = createDevice(1L, "iPhone 15", "Apple", DeviceState.IN_USE);
+        DeviceEntity device = createDevice(1L, DeviceState.IN_USE);
         DeviceUpdateCommand command = createUpdateCommand("iPhone 15 Pro Max (2024)", null, null);
 
         // When & Then
@@ -279,7 +279,7 @@ class DeviceValidatorTest {
     @Test
     void validateDelete_AvailableDevice_ShouldNotThrowException() {
         // Given
-        DeviceEntity device = createDevice(1L, "iPhone 15", "Apple", DeviceState.AVAILABLE);
+        DeviceEntity device = createDevice(1L, DeviceState.AVAILABLE);
 
         // When & Then
         assertThatCode(() -> deviceValidator.validateDelete(device))
@@ -291,29 +291,29 @@ class DeviceValidatorTest {
         // Given
         Long deviceId = 123L;
 
-        DeviceEntity device = createDevice(deviceId, "iPhone 15", "Apple", DeviceState.IN_USE);
+        DeviceEntity device = createDevice(deviceId, DeviceState.IN_USE);
         // When & Then
         assertThatThrownBy(() -> deviceValidator.validateDelete(device))
                 .isInstanceOf(DeviceInUseException.class);
 
     }
 
-    private DeviceEntity createDevice(Long id, String name, String brand, DeviceState state) {
+    private DeviceEntity createDevice(Long id, DeviceState state) {
         DeviceEntity device = new DeviceEntity();
         device.setId(id);
-        device.setName(name);
-        device.setBrand(brand);
+        device.setName("iPhone 15");
+        device.setBrand("Apple");
         device.setState(state);
         device.setCreationTime(OffsetDateTime.now());
         return device;
     }
 
     private DeviceEntity availableDevice() {
-        return createDevice(1L, "iPhone 15", "Apple", DeviceState.AVAILABLE);
+        return createDevice(1L, DeviceState.AVAILABLE);
     }
 
     private DeviceEntity inUseDevice() {
-        return createDevice(1L, "iPhone 15", "Apple", DeviceState.IN_USE);
+        return createDevice(1L, DeviceState.IN_USE);
     }
 
     private DeviceUpdateCommand createUpdateCommand(String name, String brand, DeviceState state) {
@@ -321,6 +321,6 @@ class DeviceValidatorTest {
     }
 
     private DeviceEntity inactiveDevice() {
-        return createDevice(1L, "iPhone 15", "Apple", DeviceState.INACTIVE);
+        return createDevice(1L, DeviceState.INACTIVE);
     }
 }
